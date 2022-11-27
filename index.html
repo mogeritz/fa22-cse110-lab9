@@ -50,6 +50,14 @@
 </head>
 
 <body>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "6fa40e77e6b04e3faccd9000646a7122"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
   <main>
     <form>
       <fieldset>
@@ -102,6 +110,112 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    let data = JSON.parse(
+      `[{"id":1,"first_name":"TNA"},
+      {"id":2,"first_name":"YQL"},
+      {"id":3,"first_name":"RDU"},
+      {"id":4,"first_name":"LGM"},
+      {"id":5,"first_name":"HOD"},
+      {"id":6,"first_name":"JAI"},
+      {"id":7,"first_name":"SB2"},
+      {"id":8,"first_name":"ODD"},
+      {"id":9,"first_name":"MHI"},
+      {"id":10,"first_name":"WSM"}]`);
+    
+    let idofTNA = 0;
+
+    errorBtns[0].addEventListener('click', () => {
+      console.log(data);
+    });
+
+    errorBtns[1].addEventListener('click', () => {
+      console.error("Array does not contain MUC");
+    });
+
+    errorBtns[2].addEventListener('click', () => {
+      console.count("counter");
+    });
+
+    errorBtns[3].addEventListener('click', () => {
+      console.warn("You may not be able to fly to your favorite airport");
+    });
+
+    const reason = 'id of TNA should be 1';
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(data[idofTNA].id == 1,{data,idofTNA,reason});
+    });
+
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(document.body);
+    });
+
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(document.body);
+    });
+
+    errorBtns[8].addEventListener('click', () => {
+      console.group("group");
+    });
+
+    errorBtns[9].addEventListener('click', () => {
+      console.groupEnd("group");
+    });
+
+    errorBtns[10].addEventListener('click', () => {
+      console.table(data);
+    });
+
+    errorBtns[11].addEventListener('click', () => {
+      console.time("timer");
+    });
+
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd("timer");
+    });
+
+    errorBtns[13].addEventListener('click', () => {
+      console.trace();
+    });
+
+    try {
+      let fter = document.footer;
+      fter.querySelector('span');
+    } catch (err) {
+      console.log("failed to get span in document footer");
+    } finally {
+      console.log("finished try catch finally block");
+    }
+
+    try {
+      throw 'something went wrong with spans in footer';
+    } catch (e) {
+      console.error(e);
+    }
+
+    class footerError extends Error {
+      constructor(message) {
+        super(message); // (1)
+        this.name = "footerError"; // (2)
+      }
+    }
+
+    try {
+      throw new footerError("Check the footer");
+    } catch (e) {
+      console.error(e);
+    }
+
+    window.onerror = function (errorMessage,url,lineNumber) {console.log(errorMessage + " on line " + lineNumber); return true;};
+
+    throw "You fumbled the bag";
+    
+    TrackJS.track('Fumblemania');
+    
   </script>
 </body>
 
